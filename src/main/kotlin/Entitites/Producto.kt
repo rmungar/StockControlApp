@@ -1,7 +1,6 @@
-package org.example.Producto
+package org.example.Entitites
 
 import jakarta.persistence.*
-import org.example.Proveedor.Proveedor
 import java.time.Instant
 import java.util.Date
 
@@ -26,6 +25,8 @@ data class Producto(
     @Column(nullable = false)
     var stock: Int,
 
+    @ManyToOne
+    @JoinColumn(name = "idProveedor")
     val proveedor: Proveedor? = null
 
     ) {
@@ -42,15 +43,15 @@ data class Producto(
 
     init {
 
-        id = nombre.split("")[0] + nombre.split("")[1] + categoria.split("")[0] + categoria.split("")[1] + proveedor.nombre.split("")[0] + proveedor.nombre.split("")[1]
+        id = nombre.split("")[0] + nombre.split("")[1] + categoria.split("")[0] + categoria.split("")[1] + proveedor!!.nombreProveedor.split("")[0] + proveedor!!.nombreProveedor.split("")[1]
 
-        precioConIva = (precioSinIva * 0.21).toFloat()
+        precioConIva = (precioSinIva + (precioSinIva * 0.21)).toFloat()
 
     }
 
 
     override fun toString(): String {
-        return "El producto: $nombre fue añadido el $fechaAlta por ${proveedor.nombre} con un precio de $precioConIva."
+        return "El producto: $nombre fue añadido el $fechaAlta por ${proveedor!!.nombreProveedor} con un precio de $precioConIva."
     }
 
 
