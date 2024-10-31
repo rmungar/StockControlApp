@@ -8,10 +8,10 @@ import java.util.Date
 
 @Entity
 @Table(name = "Productos")
-data class Producto(
+class Producto(
 
     @Column(nullable = false)
-    val nombre: String,
+    var nombre: String,
 
     @Column(nullable = false)
     val categoria: String,
@@ -47,6 +47,10 @@ data class Producto(
 
         precioConIva = (precioSinIva + (precioSinIva * 0.21)).toFloat()
 
+    }
+
+    fun getId(): String{
+        return id
     }
 
 

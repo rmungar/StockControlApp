@@ -9,7 +9,7 @@ data class Usuario(
 
     @Id
     @Column(name = "nombre usuario",nullable = false)
-    private val _nombre: String,
+    val nombre: String,
 
     @Column(name = "password usuario", nullable = false, length = 20)
     private val _psswd: String
@@ -17,7 +17,7 @@ data class Usuario(
 {
 
     override fun toString(): String {
-        return "Usuario $_nombre con contraseña $_psswd"
+        return "Usuario $nombre con contraseña $_psswd"
     }
 
 }
