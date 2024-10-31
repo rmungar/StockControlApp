@@ -1,6 +1,8 @@
 package org.example.Repositories
 
+import jakarta.persistence.EntityManager
 import jakarta.persistence.Persistence
+import jakarta.transaction.Transactional
 import org.example.Entitites.Proveedor
 import org.example.Utilities.Console
 
@@ -8,17 +10,25 @@ class proveedorRepository() {
 
     companion object{
         val console = Console
-        val em = Persistence.createEntityManagerFactory("unidadMySQL2").createEntityManager()
-        fun openTransaction() = em.transaction.begin()
-        fun closeTransaction() = em.close()
-        fun commitTransaction() = em.transaction.commit()
-        fun rollbackTransaction() = em.transaction.rollback()
+        val emf = Persistence.createEntityManagerFactory("unidadMySQL2")
+        fun openTransaction(em: EntityManager){
+            em.transaction.begin()
+        }
+        fun closeTransaction(em: EntityManager) {
+            em.close()
+        }
+        fun commitTransaction(em: EntityManager) {
+            em.transaction.commit()
+        }
+        fun rollbackTransaction(em: EntityManager) {
+            em.transaction.rollback()
+        }
     }
 
 
 
     fun getProveedor(productoID: String): Proveedor? {
-
+        val em = emf.createEntityManager()
         try {
             val listaProveedores = getTodosProveedores()
             if (listaProveedores != null) {
@@ -35,29 +45,31 @@ class proveedorRepository() {
 
         catch(e:Exception){
             console.mostrarTexto("Error: ${e.message}")
-            rollbackTransaction()
+            rollbackTransaction(em)
             return null
         }
         finally {
-            closeTransaction()
+            closeTransaction(em)
         }
     }
 
+
     fun getTodosProveedores(): List<Proveedor>?{
+        val em = emf.createEntityManager()
         try {
-            openTransaction()
+            openTransaction(em)
             val sqlQuery = em.createQuery("FROM Proveedor", Proveedor::class.java)
             val listaProveedores = sqlQuery.resultList
-            commitTransaction()
+            commitTransaction(em)
             return listaProveedores
         }
         catch(e:Exception){
             console.mostrarTexto("Error: ${e.message}")
-            rollbackTransaction()
+            rollbackTransaction(em)
             return null
         }
         finally {
-            closeTransaction()
+            closeTransaction(em)
         }
     }
 

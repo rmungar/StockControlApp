@@ -12,9 +12,6 @@ class productoService {
 
     }
 
-
-
-
     fun addProducto(producto: Producto): Boolean {
         return productoRepository.addProduct(producto)
     }

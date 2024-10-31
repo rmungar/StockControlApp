@@ -20,4 +20,8 @@ data class Usuario(
         return "Usuario $nombre con contraseña $_psswd"
     }
 
+    fun getPassword(): String {
+        return _psswd
+    }
+
 }
