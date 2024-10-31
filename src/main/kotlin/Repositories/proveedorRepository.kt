@@ -73,4 +73,28 @@ class proveedorRepository() {
         }
     }
 
+
+    fun getProveedor(proveedorID: Long): Proveedor? {
+        val em = emf.createEntityManager()
+        try {
+            val listaProveedores = getTodosProveedores()
+            if (listaProveedores != null) {
+                for (proveedor in listaProveedores) {
+                    if (proveedor.idProveedor == proveedorID) {
+                        return proveedor
+                    }
+                }
+            }
+            return null
+        }
+
+        catch(e:Exception){
+            console.mostrarTexto("Error: ${e.message}")
+            rollbackTransaction(em)
+            return null
+        }
+        finally {
+            closeTransaction(em)
+        }
+    }
 }

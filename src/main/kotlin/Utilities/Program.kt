@@ -251,7 +251,7 @@ class Program(
         var categoria = ""
         var descripcion = ""
         var precioSinIva = 0F
-        var stock = 0
+        val stock : Int
 
         try {
             while (nombre == ""){
@@ -273,9 +273,11 @@ class Program(
             console.mostrarTexto("Ingrese el stock del prodcuto :", false)
             stock = console.getInput().toInt()
 
-            val proveedor = getProveedor()
+            val proveedor = proveedorService.getProveedor(pedirIDProveedor())
 
-            return Producto(nombre, categoria, descripcion, precioSinIva, stock, proveedor)
+            val producto = Producto(nombre, categoria, descripcion, precioSinIva, stock, proveedor)
+
+            return producto
 
         }
 
@@ -359,5 +361,18 @@ class Program(
 
     private fun getAllProveedores(): List<Proveedor>? {
         return proveedorService.getTodosProveedores()
+    }
+
+    private fun pedirIDProveedor(): Long {
+
+        while (true){
+            console.mostrarTexto("Ingrese el id del proveedor: ", false)
+            val id = console.getInput().toLongOrNull()
+            console.mostrarTexto()
+            if (id != null){
+                return id
+            }
+        }
+
     }
 }

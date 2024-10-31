@@ -16,8 +16,6 @@ fun main() {
 
 
 
-    //usuarioService.addUsuario(Usuario("jp3", "pythonkotlin"))
-
     val programa = Program(productoService, proveedorService, usuarioService, console)
 
     programa.funcionar()

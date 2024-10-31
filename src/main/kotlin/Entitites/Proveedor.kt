@@ -18,8 +18,8 @@ data class Proveedor(
     val direccionProveedor: String,
 
     @OneToMany(mappedBy = "proveedor", cascade = [CascadeType.ALL])
-    @Column(name="lista productos", nullable = false)
-    val productos: List<Producto>?
+    @Column(name="lista productos")
+    val productos: List<Producto>? = mutableListOf()
 
 ) {
 

@@ -19,4 +19,8 @@ class proveedorService {
     }
 
 
+    fun getProveedor(proveedorID: Long) : Proveedor?{
+        return proveedorRepository.getProveedor(proveedorID)
+    }
+
 }
