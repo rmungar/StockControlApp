@@ -163,9 +163,17 @@ class Program(
 
                         val productosConStock = getProductosConStock()
                         if (productosConStock != null){
-                            productosConStock.forEach {
-                                console.mostrarTexto(it.toString())
+                            if (productosConStock.isNotEmpty()){
+                                console.mostrarTexto()
+                                console.mostrarTexto("Lista de productos")
+                                productosConStock.forEach {
+                                    console.mostrarTexto(it.toString())
+                                }
                             }
+                            else{
+                                console.mostrarTexto("No existen productos con stock en la base de datos")
+                            }
+
                         }
                         else{
                             console.mostrarTexto("No existen productos con stock en la base de datos")
@@ -176,8 +184,15 @@ class Program(
 
                         val productosSinStock = getProductosSinStock()
                         if (productosSinStock != null){
-                            productosSinStock.forEach {
-                                console.mostrarTexto(it.toString())
+                            if (productosSinStock.isNotEmpty()){
+                                console.mostrarTexto()
+                                console.mostrarTexto("Lista de productos")
+                                productosSinStock.forEach {
+                                    console.mostrarTexto(it.toString())
+                                }
+                            }
+                            else{
+                                console.mostrarTexto("No existen productos sin stock en la base de datos")
                             }
                         }
                         else{
@@ -200,9 +215,17 @@ class Program(
                         val proveedores = getAllProveedores()
 
                         if (proveedores != null){
-                            proveedores.forEach {
-                                console.mostrarTexto(it.toString())
+                            if (proveedores.isNotEmpty()){
+                                console.mostrarTexto()
+                                console.mostrarTexto("Lista de proveedores")
+                                proveedores.forEach {
+                                    console.mostrarTexto(it.toString())
+                                }
                             }
+                            else{
+                                console.mostrarTexto("No existen proveedores en la base de datos")
+                            }
+
                         }
                         else{
                             console.mostrarTexto("No existen proveedores en la base de datos")

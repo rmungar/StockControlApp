@@ -17,11 +17,14 @@ data class Proveedor(
     @Column(name="direccion proveedor", nullable = false)
     val direccionProveedor: String,
 
-    @OneToMany(mappedBy = "proveedor", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "proveedor", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     @Column(name="lista productos")
-    val productos: List<Producto>? = mutableListOf()
+    var productos: List<Producto>?
 
 ) {
+
+
+
 
     override fun toString(): String {
         var retorno = "Proveedor: $nombreProveedor con id $idProveedor y sede en $direccionProveedor provee:"
